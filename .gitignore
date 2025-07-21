@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+
+# Environment configuration
+.env
+env.py
+
+node_modules/
+
+cloudinary_python.txt
+
+# VS Code
+.vscode/
+
+# Windows system files
+.DS_Store
+Thumbs.db
