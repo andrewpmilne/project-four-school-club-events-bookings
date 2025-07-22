@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'child',
+    'club',
 ]
 
 LANGUAGE_CODE = 'en-gb'
