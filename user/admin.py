@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User
+from child.models import Child
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
@@ -21,3 +22,8 @@ class UserAdmin(BaseUserAdmin):
     )
     search_fields = ('email', 'name')
     ordering = ('email',)
+
+@admin.register(Child)
+class ChildAdmin(admin.ModelAdmin):
+    list_display = ('name', 'parent', 'date_of_birth')
+    search_fields = ('name', 'parent__email', 'parent__name')
