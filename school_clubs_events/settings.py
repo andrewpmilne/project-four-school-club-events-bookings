@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'user',
     'child',
     'club',
+    'enrollment'
 ]
 
 LANGUAGE_CODE = 'en-gb'
