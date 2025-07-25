@@ -1,38 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
     <title>Sign Up</title>
 </head>
 
 <body>
-    <h1>Create an Account</h1>
 
     {% if messages %}
-    <ul>
+    <ul class="messages">
         {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
     </ul>
     {% endif %}
 
+    <h2>Sign Up</h2>
+
     <form method="POST">
         {% csrf_token %}
-        <label>Email: <input type="email" name="email" required /></label><br />
-        <label>Name: <input type="text" name="name" /></label><br />
-        <label>Role:
-            <select name="role" required>
-                <option value="teacher">Teacher</option>
-                <option value="parent">Parent</option>
-            </select>
-        </label><br />
-        <label>Password: <input type="password" name="password" required /></label><br />
-        <label>Confirm Password: <input type="password" name="password_confirm" required /></label><br />
+        {{ form.as_p }}
         <button type="submit">Sign Up</button>
     </form>
 
-    <p>Already have an account? <a href="{% url 'user:home' %}">Login here</a>.</p>
 </body>
 
 </html>
