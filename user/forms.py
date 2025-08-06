@@ -11,9 +11,11 @@ class SignupForm(forms.ModelForm):
         model = User
         fields = ['email', 'first_name', 'surname', 'role']
 
+    # validation for the signup form
     def clean(self):
         cleaned_data = super().clean()
 
+        # Check for required fields
         required_fields = ['email', 'first_name', 'surname', 'role', 'password', 'password_confirm']
         for field in required_fields:
             value = cleaned_data.get(field)
@@ -29,7 +31,8 @@ class SignupForm(forms.ModelForm):
 
         password = cleaned_data.get('password')
         password_confirm = cleaned_data.get('password_confirm')
-
+        
+        # Password validation
         if password and password_confirm:
             if password != password_confirm:
                 raise forms.ValidationError("Passwords do not match.")
