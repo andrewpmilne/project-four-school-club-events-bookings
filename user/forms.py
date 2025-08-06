@@ -13,6 +13,20 @@ class SignupForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+
+        required_fields = ['email', 'first_name', 'surname', 'role', 'password', 'password_confirm']
+        for field in required_fields:
+            value = cleaned_data.get(field)
+            if not value or (isinstance(value, str) and value.strip() == ''):
+                self.add_error(field, f"{field.replace('_', ' ').capitalize()} is required.")
+        
+        # Email domain validation for teachers
+        role = cleaned_data.get('role')
+        email = cleaned_data.get('email')
+        if role == 'teacher':
+            if email and not email.endswith('.sch.uk'):
+                self.add_error('email', "Teachers must sign up with an email address ending in '.sch.uk'.")
+
         password = cleaned_data.get('password')
         password_confirm = cleaned_data.get('password_confirm')
 
