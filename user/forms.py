@@ -8,7 +8,7 @@ class SignupForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'name', 'role']
+        fields = ['email', 'first_name', 'surname', 'role']
 
     def clean(self):
         cleaned_data = super().clean()
