@@ -19,4 +19,5 @@ class Enrollment(models.Model):
         unique_together = ('child', 'club')  # Prevent double enrollment
 
     def __str__(self):
-        return f"{self.child.name} -> {self.club.name}"
+        return f"{self.child.first_name} {self.child.surname} -> {self.club.name}"
+

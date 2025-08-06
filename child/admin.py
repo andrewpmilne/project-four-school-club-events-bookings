@@ -3,5 +3,5 @@ from .models import Child
 
 @admin.register(Child)
 class ChildAdmin(admin.ModelAdmin):
-    list_display = ('name', 'parent', 'date_of_birth')
-    search_fields = ('name', 'parent__email', 'parent__name')
+    list_display = ('first_name', 'surname', 'parent', 'date_of_birth')
+    search_fields = ('first_name', 'surname', 'parent__email', 'parent__name')
