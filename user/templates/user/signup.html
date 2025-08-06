@@ -19,6 +19,12 @@
 
     <form method="POST">
         {% csrf_token %}
+
+        <p>
+            Password must be at least 8 characters long, and include at least one uppercase letter, one number, and one
+            special character.
+        </p>
+
         {{ form.as_p }}
         <button type="submit">Sign Up</button>
     </form>
