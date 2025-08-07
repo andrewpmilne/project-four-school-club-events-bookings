@@ -13,26 +13,36 @@
 <body class="d-flex flex-column min-vh-100">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="{% url 'user:home' %}">School Clubs and Events</a>
-            <div class="collapse navbar-collapse justify-content-end">
+
+            <!-- Toggler button for small screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <span class="navbar-text text-white">
-                            Hello, {{ user.username }}
+                            Hello, {{ user.first_name }}
                         </span>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                        <a class="nav-link text-white" href="{% url 'user:login' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+
+
 
     <!-- Main Content -->
     <main class="container my-4 flex-grow-1">
