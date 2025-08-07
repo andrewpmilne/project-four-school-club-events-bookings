@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, logout
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignupForm
 
@@ -15,7 +17,28 @@ def signup_view(request):
             form.save()
             messages.success(request, "Account created successfully! Please log in.")
             return redirect('user:login')
-
     else:
         form = SignupForm()
     return render(request, 'user/signup.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        user = form.get_user()
+        if user.role == 'teacher':
+            return redirect('user:teacher_dashboard')
+        elif user.role == 'parent':
+            return redirect('user:parent_dashboard')
+        return super().form_valid(form)
+    
+@login_required
+def teacher_dashboard(request):
+    return render(request, 'user/teacher_dashboard.html')
+
+@login_required
+def parent_dashboard(request):
+    return render(request, 'user/parent_dashboard.html')
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Logout successful.")
+    return redirect('user:home')
