@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponseForbidden
+from django.urls import reverse_lazy
 from .forms import SignupForm
 
 def home_view(request):
@@ -22,20 +24,24 @@ def signup_view(request):
     return render(request, 'user/signup.html', {'form': form})
 
 class CustomLoginView(LoginView):
-    def form_valid(self, form):
-        user = form.get_user()
+    def get_success_url(self):
+        user = self.request.user
         if user.role == 'teacher':
-            return redirect('user:teacher_dashboard')
+            return reverse_lazy('user:teacher_dashboard')
         elif user.role == 'parent':
-            return redirect('user:parent_dashboard')
-        return super().form_valid(form)
+            return reverse_lazy('user:parent_dashboard')
+        return reverse_lazy('user:home')
     
 @login_required
 def teacher_dashboard(request):
+    if request.user.role != 'teacher':
+        return HttpResponseForbidden("You are not allowed to access this page.")
     return render(request, 'user/teacher_dashboard.html')
 
 @login_required
 def parent_dashboard(request):
+    if request.user.role != 'parent':
+        return HttpResponseForbidden("You are not allowed to access this page.")
     return render(request, 'user/parent_dashboard.html')
 
 def logout_view(request):
