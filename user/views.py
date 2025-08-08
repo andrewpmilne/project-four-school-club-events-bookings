@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from .forms import SignupForm
+from .decorators import role_required
 
 def home_view(request):
     return render(request, 'user/home.html')
@@ -33,15 +34,13 @@ class CustomLoginView(LoginView):
         return reverse_lazy('user:home')
     
 @login_required
+@role_required('teacher')
 def teacher_dashboard(request):
-    if request.user.role != 'teacher':
-        return HttpResponseForbidden("You are not allowed to access this page.")
     return render(request, 'user/teacher_dashboard.html')
 
 @login_required
+@role_required('parent')
 def parent_dashboard(request):
-    if request.user.role != 'parent':
-        return HttpResponseForbidden("You are not allowed to access this page.")
     return render(request, 'user/parent_dashboard.html')
 
 def logout_view(request):
