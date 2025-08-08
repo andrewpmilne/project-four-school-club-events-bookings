@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import ChildForm
+from .models import Child
 from user.decorators import role_required
 
 
@@ -19,3 +20,15 @@ def create_child(request):
     else:
         form = ChildForm()
     return render(request, 'child/create_child.html', {'form': form})
+
+
+@login_required
+def view_children_cards(request):
+    children = Child.objects.filter(parent=request.user)
+    return render(
+        request,
+        'child/view_children_cards.html',
+        {
+            'children': children,
+        }
+    )

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Your Children{% endblock %}
+
+{% block content %}
+<h2>Your Children</h2>
+
+<p>Click on a name of a child to edit.</p>
+
+<div class="row">
+    {% if children %}
+    {% for child in children %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ child.first_name }} {{ child.surname }}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>You have no children added yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
