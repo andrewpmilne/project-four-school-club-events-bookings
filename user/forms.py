@@ -4,6 +4,9 @@ from user.models import User
 from django.contrib.auth.forms import AuthenticationForm
 
 class SignupForm(forms.ModelForm):
+    """
+    Form for registering a new user account.
+    """
     password = forms.CharField(widget=forms.PasswordInput)
     password_confirm = forms.CharField(widget=forms.PasswordInput)
 
@@ -13,6 +16,9 @@ class SignupForm(forms.ModelForm):
 
     # validation for the signup form
     def clean(self):
+        """
+        Perform custom form validation.
+        """
         cleaned_data = super().clean()
 
         # Check for required fields
@@ -47,6 +53,9 @@ class SignupForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
+        """
+        Save the new user instance with a hashed password.
+        """
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
         if commit:
@@ -54,4 +63,8 @@ class SignupForm(forms.ModelForm):
         return user
 
 class EmailAuthenticationForm(AuthenticationForm):
+    """
+    Custom authentication form that uses an email field
+    instead of the default username field.
+    """
     username = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'autofocus': True}))

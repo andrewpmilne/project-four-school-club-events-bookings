@@ -9,6 +9,9 @@ from user.decorators import role_required
 @login_required
 @role_required('parent')
 def create_child(request):
+    """
+    Create a new child record for the logged-in parent.
+    """
     if request.method == 'POST':
         form = ChildForm(request.POST)
         if form.is_valid():
@@ -24,6 +27,9 @@ def create_child(request):
 
 @login_required
 def view_children_cards(request):
+    """
+    Display all children belonging to the logged-in parent in a card-style layout.
+    """
     children = Child.objects.filter(parent=request.user)
     return render(
         request,

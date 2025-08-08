@@ -3,7 +3,13 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.utils import timezone
 
 class UserManager(BaseUserManager):
+    """
+    Custom manager for the User model with methods to create users and superusers.
+    """
     def create_user(self, email, password, role, first_name=None, surname=None, **extra_fields):
+        """
+        Create and return a regular user with the given email, password, and role.
+        """
         if not email:
             raise ValueError('Users must have an email address')
         if role not in ('teacher', 'parent'):
@@ -16,6 +22,9 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, role='teacher', first_name=None, surname=None, **extra_fields):
+        """
+        Create and return a superuser with the given email, password, and role.
+        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
@@ -29,6 +38,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom User model supporting 'teacher' and 'parent' roles,
+    using email as the unique identifier for authentication.
+    """
     ROLE_CHOICES = [
         ('teacher', 'Teacher'),
         ('parent', 'Parent'),
@@ -52,4 +65,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['role'] 
 
     def __str__(self):
+        """
+        Return a string representation of the user.
+        """
         return self.email

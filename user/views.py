@@ -9,11 +9,17 @@ from .forms import SignupForm
 from .decorators import role_required
 
 def home_view(request):
+    """
+    Render the homepage view.
+    """
     return render(request, 'user/home.html')
 
 User = get_user_model()
 
 def signup_view(request):
+    """
+    Handle user signup.
+    """
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -25,7 +31,13 @@ def signup_view(request):
     return render(request, 'user/signup.html', {'form': form})
 
 class CustomLoginView(LoginView):
+    """
+    Custom login view that redirects users based on their role after login.
+    """
     def get_success_url(self):
+        """
+        Determine the redirect URL after a successful login.
+        """
         user = self.request.user
         if user.role == 'teacher':
             return reverse_lazy('user:teacher_dashboard')
@@ -36,14 +48,23 @@ class CustomLoginView(LoginView):
 @login_required
 @role_required('teacher')
 def teacher_dashboard(request):
+    """
+    Display the teacher's dashboard.
+    """
     return render(request, 'user/teacher_dashboard.html')
 
 @login_required
 @role_required('parent')
 def parent_dashboard(request):
+    """
+    Display the parent's dashboard.
+    """
     return render(request, 'user/parent_dashboard.html')
 
 def logout_view(request):
+    """
+    Log the user out and redirect to the home page.
+    """
     logout(request)
     messages.success(request, "Logout successful.")
     return redirect('user:home')

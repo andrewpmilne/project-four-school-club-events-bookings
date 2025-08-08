@@ -3,6 +3,9 @@ from django.conf import settings
 from django.utils import timezone
 
 class Child(models.Model):
+    """
+    Represents a child linked to a parent (user) in the system.
+    """
     parent = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='children')
     first_name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
@@ -15,6 +18,9 @@ class Child(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        """
+        Return a string representation of the child, including the parent's name or email.
+        """
         parent_name = f"{self.parent.first_name or ''} {self.parent.surname or ''}".strip()
         if not parent_name:
             parent_name = self.parent.email

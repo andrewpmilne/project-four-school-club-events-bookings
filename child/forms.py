@@ -3,6 +3,9 @@ from .models import Child
 
 
 class ChildForm(forms.ModelForm):
+    """
+    Form for creating or updating a Child instance.
+    """
     class Meta:
         model = Child
         fields = [
