@@ -4,5 +4,19 @@
 
 {% block content %}
 <h1>Welcome to the School Clubs & Events System</h1>
-<p><a href="{% url 'user:login' %}">Login</a> or <a href="{% url 'user:signup' %}">Sign Up</a></p>
+
+{% if user.is_authenticated %}
+{% if user.role == "teacher" %}
+<p><a href="{% url 'user:teacher_dashboard' %}">Click here to go to your dashboard.</a></p>
+{% elif user.role == "parent" %}
+<p><a href="{% url 'user:parent_dashboard' %}">Click here to go to your dashboard.</a></p>
+{% else %}
+<p>Your account doesn’t have a recognized role.</p>
+{% endif %}
+{% else %}
+<p>
+    <a href="{% url 'user:login' %}">Login</a> or
+    <a href="{% url 'user:signup' %}">Sign Up</a>
+</p>
+{% endif %}
 {% endblock %}
