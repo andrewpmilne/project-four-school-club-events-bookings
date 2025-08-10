@@ -5,7 +5,7 @@
 {% block content %}
 <h2>Your Children</h2>
 
-<p>Click on a name of a child to edit.</p>
+<p>Click on a name of a child to edit or delete.</p>
 
 <div class="row">
     {% if children %}
@@ -13,7 +13,11 @@
     <div class="col-md-4 mb-4">
         <div class="card h-100">
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ child.first_name }} {{ child.surname }}</h5>
+                <h5 class="card-title">
+                    <a href="{% url 'child:edit_child' child.id %}">
+                        {{ child.first_name }} {{ child.surname }}
+                    </a>
+                </h5>
             </div>
         </div>
     </div>
