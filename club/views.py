@@ -30,12 +30,10 @@ def list_teacher_clubs(request):
 @role_required('teacher')
 def manage_single_club(request, club_id):
     club = get_object_or_404(Club, id=club_id, teacher=request.user)
-    
+
     if request.method == 'POST':
         if 'delete' in request.POST:
-            club.delete()
-            messages.success(request, "Club deleted successfully.")
-            return redirect('club:list_teacher_clubs')
+            return redirect('club:delete_club_confirm', club_id=club.id)
 
         form = ClubForm(request.POST, instance=club)
         if form.is_valid():
@@ -46,3 +44,16 @@ def manage_single_club(request, club_id):
         form = ClubForm(instance=club)
 
     return render(request, 'club/manage_single_club.html', {'form': form, 'club': club})
+
+
+@login_required
+@role_required('teacher')
+def delete_club_confirm(request, club_id):
+    club = get_object_or_404(Club, id=club_id, teacher=request.user)
+
+    if request.method == 'POST':
+        club.delete()
+        messages.success(request, "Club deleted successfully.")
+        return redirect('club:list_teacher_clubs')
+
+    return render(request, 'club/delete_club_confirm.html', {'club': club})
