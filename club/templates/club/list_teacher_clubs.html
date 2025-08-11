@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}My Clubs{% endblock %}
+
+{% block content %}
+<h2>My Clubs & Events</h2>
+<p>Click on a club to edit or delete it.</p>
+
+{% if clubs %}
+<ul>
+    {% for club in clubs %}
+    <li>
+        <a href="{% url 'club:manage_single_club' club.id %}">
+            {{ club.name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>You haven't created any clubs yet.</p>
+{% endif %}
+{% endblock %}
