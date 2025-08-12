@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
-from .views import CustomLoginView, logout_view
+from .views import CustomLoginView
 from .forms import EmailAuthenticationForm
-from django.contrib.auth.views import LogoutView
+
 
 app_name = 'user'
 
@@ -14,6 +14,8 @@ urlpatterns = [
         authentication_form=EmailAuthenticationForm
     ), name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('dashboard/teacher/', views.teacher_dashboard, name='teacher_dashboard'),
-    path('dashboard/parent/', views.parent_dashboard, name='parent_dashboard'),
+    path('dashboard/teacher/', views.teacher_dashboard,
+         name='teacher_dashboard'),
+    path('dashboard/parent/', views.parent_dashboard,
+         name='parent_dashboard'),
 ]

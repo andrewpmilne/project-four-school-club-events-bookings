@@ -1,14 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import (
+    AbstractBaseUser, PermissionsMixin, BaseUserManager
+)
 from django.utils import timezone
+
 
 class UserManager(BaseUserManager):
     """
-    Custom manager for the User model with methods to create users and superusers.
+    Custom manager for the User model with methods
+    to create users and superusers.
     """
-    def create_user(self, email, password, role, first_name=None, surname=None, **extra_fields):
+    def create_user(self, email, password, role, first_name=None, surname=None,
+                    **extra_fields):
         """
-        Create and return a regular user with the given email, password, and role.
+        Create and return a regular user with
+        the given email, password, and role.
         """
         if not email:
             raise ValueError('Users must have an email address')
@@ -16,12 +22,14 @@ class UserManager(BaseUserManager):
             raise ValueError('Role must be either "teacher" or "parent"')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, role=role, first_name=first_name, surname=surname, **extra_fields)
+        user = self.model(email=email, role=role, first_name=first_name,
+                          surname=surname, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, role='teacher', first_name=None, surname=None, **extra_fields):
+    def create_superuser(self, email, password, role='teacher',
+                         first_name=None, surname=None, **extra_fields):
         """
         Create and return a superuser with the given email, password, and role.
         """
@@ -34,7 +42,8 @@ class UserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self.create_user(email, password, role, first_name, surname, **extra_fields)
+        return self.create_user(email, password, role,
+                                first_name, surname, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -62,7 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['role'] 
+    REQUIRED_FIELDS = ['role']
 
     def __str__(self):
         """

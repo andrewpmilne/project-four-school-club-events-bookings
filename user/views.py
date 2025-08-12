@@ -3,10 +3,10 @@ from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from .forms import SignupForm
 from .decorators import role_required
+
 
 def home_view(request):
     """
@@ -14,7 +14,9 @@ def home_view(request):
     """
     return render(request, 'user/home.html')
 
+
 User = get_user_model()
+
 
 def signup_view(request):
     """
@@ -24,11 +26,13 @@ def signup_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Account created successfully! Please log in.")
+            messages.success(request,
+                             "Account created successfully! Please log in.")
             return redirect('user:login')
     else:
         form = SignupForm()
     return render(request, 'user/signup.html', {'form': form})
+
 
 class CustomLoginView(LoginView):
     """
@@ -44,7 +48,8 @@ class CustomLoginView(LoginView):
         elif user.role == 'parent':
             return reverse_lazy('user:parent_dashboard')
         return reverse_lazy('user:home')
-    
+
+
 @login_required
 @role_required('teacher')
 def teacher_dashboard(request):
@@ -53,6 +58,7 @@ def teacher_dashboard(request):
     """
     return render(request, 'user/teacher_dashboard.html')
 
+
 @login_required
 @role_required('parent')
 def parent_dashboard(request):
@@ -60,6 +66,7 @@ def parent_dashboard(request):
     Display the parent's dashboard.
     """
     return render(request, 'user/parent_dashboard.html')
+
 
 def logout_view(request):
     """
