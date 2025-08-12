@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ChildForm
 from .models import Child
-from user.decorators import role_required   
+from user.decorators import role_required
 
 
 @login_required
@@ -29,7 +29,7 @@ def create_child(request):
 @role_required('parent')
 def view_children_cards(request):
     """
-    Display all children belonging to the logged-in parent in a card-style layout.
+    Display all children belonging to the logged-in parent.
     """
     children = Child.objects.filter(parent=request.user)
     return render(
@@ -53,7 +53,10 @@ def edit_child(request, child_id):
         form = ChildForm(request.POST, instance=child)
         if form.is_valid():
             form.save()
-            messages.success(request, f"{child.first_name} {child.surname}'s details updated successfully!")
+            messages.success(
+                request,
+                f"{child.first_name} {child.surname}'s "
+                "details updated successfully!")
             return redirect('child:view_children_cards')
         else:
             messages.error(request, "Please fix the errors below.")
@@ -76,7 +79,9 @@ def delete_child(request, child_id):
 
     if request.method == 'POST':
         child.delete()
-        messages.success(request, f"{child.first_name} {child.surname} has been deleted.")
+        messages.success(
+            request, f"{child.first_name} {child.surname} "
+            "has been deleted.")
         return redirect('child:view_children_cards')
-    
+
     return render(request, 'child/delete_child_confirm.html', {'child': child})

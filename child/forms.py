@@ -1,7 +1,6 @@
 from django import forms
 from .models import Child
-from django.core.exceptions import ValidationError
-from datetime import date, timedelta
+from datetime import date
 import re
 
 
@@ -23,7 +22,7 @@ class ChildForm(forms.ModelForm):
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
         }
-    
+
     def clean(self):
         cleaned_data = super().clean()
 
@@ -35,10 +34,10 @@ class ChildForm(forms.ModelForm):
 
         # Required fields check
         required_fields = [
-            'first_name', 
-            'surname', 
-            'date_of_birth', 
-            'emergency_contact_name', 
+            'first_name',
+            'surname',
+            'date_of_birth',
+            'emergency_contact_name',
             'emergency_contact_phone'
         ]
         for field in required_fields:
@@ -50,14 +49,16 @@ class ChildForm(forms.ModelForm):
             today = date.today()
             age = (today - date_of_birth).days // 365
             if age < 4 or age > 18:
-                self.add_error('date_of_birth', 'Child age must be between 4 and 18 years.')
+                self.add_error('date_of_birth',
+                               'Child age must be between 4 and 18 years.')
 
         # Phone number validation
         if emergency_phone:
             phone_pattern = re.compile(r'^\+?[\d\s\-]{7,15}$')
             if not phone_pattern.match(emergency_phone):
-                self.add_error('emergency_contact_phone', 'Enter a valid phone number.')
-        
+                self.add_error('emergency_contact_phone',
+                               'Enter a valid phone number.')
+
         # Check if child already registered (same first_name, surname, dob)
         if first_name and surname and date_of_birth:
             existing_children = Child.objects.filter(
@@ -67,7 +68,9 @@ class ChildForm(forms.ModelForm):
             )
             # Exclude the current instance if editing
             if self.instance.pk:
-                existing_children = existing_children.exclude(pk=self.instance.pk)
+                existing_children = existing_children.exclude(
+                    pk=self.instance.pk
+                )
 
             if existing_children.exists():
                 self.add_error(None, 'This child is already registered.')
