@@ -5,6 +5,7 @@ from django.contrib import messages
 from .models import Club
 from .forms import ClubForm
 
+
 @login_required
 @role_required('teacher')
 def create_club(request):
@@ -20,11 +21,13 @@ def create_club(request):
         form = ClubForm()
     return render(request, 'club/create_club.html', {'form': form})
 
+
 @login_required
 @role_required('teacher')
 def list_teacher_clubs(request):
     clubs = Club.objects.filter(teacher=request.user).order_by('-created_at')
     return render(request, 'club/list_teacher_clubs.html', {'clubs': clubs})
+
 
 @login_required
 @role_required('teacher')
@@ -43,7 +46,14 @@ def manage_single_club(request, club_id):
     else:
         form = ClubForm(instance=club)
 
-    return render(request, 'club/manage_single_club.html', {'form': form, 'club': club})
+    return render(
+        request,
+        'club/manage_single_club.html',
+        {
+            'form': form,
+            'club': club,
+        },
+    )
 
 
 @login_required
