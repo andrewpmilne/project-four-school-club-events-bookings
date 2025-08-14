@@ -5,7 +5,10 @@
 {% block content %}
 
 <h2>Welcome to the Parent Dashboard</h2>
-<p>This is where parents can browse and enroll in events.</p>
+<p>This is where parents can credit and edit children and enroll in events.</p>
 <a href="{% url 'child:create_child' %}" class="btn btn-primary">Create Children</a>
 <a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary">View/Edit Children</a>
+<a href="{% url 'enrollment:create_enrollment' %}" class="btn btn-success">
+    Enroll children in clubs/events
+</a>
 {% endblock %}

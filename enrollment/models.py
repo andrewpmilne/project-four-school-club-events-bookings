@@ -16,8 +16,7 @@ class Enrollment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ('child', 'club')  # Prevent double enrollment
+        unique_together = ('child', 'club')
 
     def __str__(self):
         return f"{self.child.first_name} {self.child.surname} -> {self.club.name}"
-
