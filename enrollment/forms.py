@@ -28,17 +28,38 @@ class EnrollmentForm(forms.ModelForm):
             # Too young
             if club.min_age is not None and age < club.min_age:
                 raise ValidationError(
-                    f"{child.first_name} {child.surname} is too young "
-                    f"for {club.name}. "
-                    f"Minimum age is {club.min_age}."
+                    (
+                        f"{child.first_name} {child.surname} is too young "
+                        f"for {club.name}. Minimum age is {club.min_age}."
+                    )
                 )
 
             # Too old
             if club.max_age is not None and age > club.max_age:
                 raise ValidationError(
-                    f"{child.first_name} {child.surname} is too old "
-                    f"for {club.name}. "
-                    f"Maximum age is {club.max_age}."
+                    (
+                        f"{child.first_name} {child.surname} is too old "
+                        f"for {club.name}. Maximum age is {club.max_age}."
+                    )
                 )
+
+        # Already enrolled
+        if Enrollment.objects.filter(child=child, club=club).exists():
+            raise ValidationError(
+                (
+                    f"{child.first_name} {child.surname} is already "
+                    f"enrolled in {club.name}."
+                )
+            )
+
+        # Check if club is full
+        current_enrollments = Enrollment.objects.filter(club=club).count()
+        if club.capacity is not None and current_enrollments >= club.capacity:
+            raise ValidationError(
+                (
+                    f"{club.name} has reached its maximum capacity of "
+                    f"{club.capacity} children."
+                )
+            )
 
         return cleaned_data
