@@ -3,6 +3,7 @@ from django.contrib import messages
 from user.decorators import role_required
 from .forms import EnrollmentForm
 
+
 @role_required('parent')
 def create_enrollment(request):
     """
