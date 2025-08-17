@@ -15,5 +15,10 @@
     <button type="submit">Log in</button>
 </form>
 
-<p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+<p>
+    <a href="{% url 'password_reset' %}">Forgot password?</a>
+</p>
+<p>
+    <a href="{% url 'user:signup' %}" class="btn">Register</a>
+</p>
 {% endblock %}
