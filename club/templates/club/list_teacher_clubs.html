@@ -19,4 +19,9 @@
 {% else %}
 <p>You haven't created any clubs yet.</p>
 {% endif %}
+
+<a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary mb-3">
+    Go back to Dashboard
+</a>
+
 {% endblock %}
