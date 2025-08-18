@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+from datetime import date
 from .forms import ChildForm
 from .models import Child
 from user.decorators import role_required
@@ -17,11 +18,52 @@ def create_child(request):
         if form.is_valid():
             child = form.save(commit=False)
             child.parent = request.user
+
+            # Validations:
+
+            # Age validation (between 4 and 18)
+            today = date.today()
+            age = (today - child.date_of_birth).days // 365
+            if age < 4 or age > 18:
+                messages.error(
+                    request,
+                    "Child age must be between 4 and 18 years."
+                    )
+                return render(
+                    request,
+                    'child/create_child.html',
+                    {'form': form}
+                    )
+
+            # Duplicate check (same parent, same first name, surname, DOB)
+            existing_children = Child.objects.filter(
+                parent=request.user,
+                first_name__iexact=child.first_name.strip(),
+                surname__iexact=child.surname.strip(),
+                date_of_birth=child.date_of_birth
+            )
+            if existing_children.exists():
+                messages.error(
+                    request,
+                    "This child is already registered under your account."
+                    )
+                return render(
+                    request,
+                    'child/create_child.html',
+                    {'form': form}
+                    )
+
+            # Save child if all validations pass
             child.save()
             messages.success(request, "New child created successfully!")
             return redirect('user:parent_dashboard')
+
+        else:
+            messages.error(request, "Please fix the errors below.")
+
     else:
         form = ChildForm()
+
     return render(request, 'child/create_child.html', {'form': form})
 
 
