@@ -10,10 +10,20 @@ class Club(models.Model):
         ('weekly', 'Weekly'),
     ]
 
+    CLUB_OR_EVENT_CHOICES = [
+        ('club', 'Club'),
+        ('event', 'Event'),
+    ]
+
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE,
                                 related_name='clubs')
     name = models.CharField(max_length=255)
+    club_or_event = models.CharField(
+        max_length=6,
+        choices=CLUB_OR_EVENT_CHOICES,
+        default='club'
+    )
     description = models.TextField(blank=True)
     min_age = models.PositiveIntegerField(null=True, blank=True)
     max_age = models.PositiveIntegerField(null=True, blank=True)

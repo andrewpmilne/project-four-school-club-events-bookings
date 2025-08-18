@@ -11,6 +11,7 @@ class ClubForm(forms.ModelForm):
         model = Club
         fields = [
             'name',
+            'club_or_event',
             'description',
             'min_age',
             'max_age',

@@ -57,7 +57,7 @@ class ChildForm(forms.ModelForm):
             phone_pattern = re.compile(r'^\+?[\d\s\-]{7,15}$')
             if not phone_pattern.match(emergency_phone):
                 self.add_error('emergency_contact_phone',
-                               'Enter a valid phone number.')
+                               'Enter a valid phone number with 7-15 numbers.')
 
         # Check if child already registered (same first_name, surname, dob)
         if first_name and surname and date_of_birth:
