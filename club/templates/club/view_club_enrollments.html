@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}My Club Enrollments{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="mb-4">Enrolled Children for My Clubs</h2>
+
+    {% if clubs %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for club in clubs %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ club.name }}</h5>
+                    <p class="card-text mb-2">
+                        <strong>Type:</strong> {{ club.get_club_or_event_display }}
+                    </p>
+                    <p class="card-text mb-2">
+                        <strong>Enrolled Children:</strong>
+                        {% if club.enrollments.all %}
+                        <ul class="list-unstyled mb-0">
+                            {% for enrollment in club.enrollments.all %}
+                            <li>{{ enrollment.child.first_name }} {{ enrollment.child.surname }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <span class="text-muted">No enrollments yet.</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>You have not created any clubs yet.</p>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary">&larr; Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

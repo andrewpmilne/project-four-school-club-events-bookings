@@ -208,3 +208,19 @@ def delete_club_confirm(request, club_id):
         messages.success(request, "Club deleted successfully.")
         return redirect('club:list_teacher_clubs')
     return render(request, 'club/delete_club_confirm.html', {'club': club})
+
+
+@login_required
+@role_required('teacher')
+def view_club_enrollments(request):
+    """
+    View all enrollments for clubs managed by the teacher."""
+    clubs = (
+        Club.objects
+        .filter(teacher=request.user)
+        .prefetch_related('enrollments__child')
+    )
+    context = {
+        'clubs': clubs
+    }
+    return render(request, 'club/view_club_enrollments.html', context)

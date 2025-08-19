@@ -4,6 +4,7 @@ from .views import (
     list_teacher_clubs,
     manage_single_club,
     delete_club_confirm,
+    view_club_enrollments,
 )
 
 app_name = 'club'
@@ -17,4 +18,8 @@ urlpatterns = [
         delete_club_confirm,
         name='delete_club_confirm',
     ),
+    path(
+        'enrollments/',
+        view_club_enrollments,
+        name='view_club_enrollments'),
 ]
