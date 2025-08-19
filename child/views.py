@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import date
 from .forms import ChildForm
 from .models import Child
+from club.models import Club
 from user.decorators import role_required
 
 
@@ -127,3 +128,13 @@ def delete_child(request, child_id):
         return redirect('child:view_children_cards')
 
     return render(request, 'child/delete_child_confirm.html', {'child': child})
+
+
+@login_required
+@role_required('parent')
+def view_all_clubs(request):
+    """
+    Display a list of all clubs and events to parents.
+    """
+    clubs = Club.objects.all().order_by('start_date', 'start_time')
+    return render(request, "child/view_all_clubs.html", {"clubs": clubs})
