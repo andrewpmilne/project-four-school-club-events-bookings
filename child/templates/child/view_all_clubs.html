@@ -63,5 +63,8 @@
     {% else %}
     <p>No clubs or events available at the moment.</p>
     {% endif %}
+    <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mb-4">
+        &larr; Back to Dashboard
+    </a>
 </div>
 {% endblock %}
