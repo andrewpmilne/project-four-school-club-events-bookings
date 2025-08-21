@@ -6,16 +6,21 @@
 <h2>Welcome to the Teacher Dashboard</h2>
 <p>This is where teachers will manage clubs and events.</p>
 
-<a href="{% url 'club:create_club' %}" class="btn btn-primary mt-3">
+<a href="{% url 'club:create_club' %}" class="btn btn-primary mt-3" aria-label="Create a new club or event">
     Create Club/Event
 </a>
-<a href="{% url 'club:list_teacher_clubs' %}" class="btn btn-secondary mt-3">
+
+<a href="{% url 'club:list_teacher_clubs' %}" class="btn btn-secondary mt-3" aria-label="Manage your existing clubs">
     Manage My Clubs
 </a>
-<a href="{% url 'club:view_club_enrollments' %}" class="btn btn-info me-2">
+
+<a href="{% url 'club:view_club_enrollments' %}" class="btn btn-info me-2"
+    aria-label="View information about enrolled children in your clubs">
     View My Clubs Information
 </a>
-<a href="{% url 'user:logout' %}" class="btn btn-danger">
+
+<a href="{% url 'user:logout' %}" class="btn btn-danger" aria-label="Log out of your account">
     Logout
 </a>
+
 {% endblock %}

@@ -12,16 +12,16 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Log in</button>
+    <button type="submit" aria-label="Log in to your account">Log in</button>
 </form>
 
 <p>
-    <a href="{% url 'user:home' %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'user:home' %}" class="btn btn-secondary" aria-label="Back to homepage">Back</a>
 </p>
 <p>
-    <a href="{% url 'password_reset' %}">Forgot password?</a>
+    <a href="{% url 'password_reset' %}" aria-label="Reset your password">Forgot password?</a>
 </p>
 <p>
-    <a href="{% url 'user:signup' %}" class="btn">Register</a>
+    <a href="{% url 'user:signup' %}" class="btn" aria-label="Register a new account">Register</a>
 </p>
 {% endblock %}

@@ -5,16 +5,15 @@
 {% block content %}
 
 <h2>Welcome to the Parent Dashboard</h2>
-<p>This is where parents can credit and edit children and enroll in events.</p>
-<a href="{% url 'child:create_child' %}" class="btn btn-primary">Create Children</a>
-<a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary">View/Edit Children</a>
-<a href="{% url 'enrollment:create_enrollment' %}" class="btn btn-success">
-    Enroll children in clubs/events
-</a>
-<a href="{% url 'child:view_all_clubs' %}" class="btn btn-info me-2">
-    View List of All Clubs
-</a>
-<a href="{% url 'user:logout' %}" class="btn btn-danger">
-    Logout
-</a>
+<p aria-label="Dashboard instructions">This is where parents can create and edit children and enroll in events.</p>
+<a href="{% url 'child:create_child' %}" class="btn btn-primary" aria-label="Create a new child record">Create
+    Children</a>
+<a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary"
+    aria-label="View or edit existing children">View/Edit Children</a>
+<a href="{% url 'enrollment:create_enrollment' %}" class="btn btn-success"
+    aria-label="Enroll children in clubs or events">Enroll children in clubs/events</a>
+<a href="{% url 'child:view_all_clubs' %}" class="btn btn-info me-2"
+    aria-label="View the list of all available clubs">View List of All Clubs</a>
+<a href="{% url 'user:logout' %}" class="btn btn-danger" aria-label="Logout from the dashboard">Logout</a>
+
 {% endblock %}

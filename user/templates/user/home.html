@@ -7,16 +7,25 @@
 
 {% if user.is_authenticated %}
 {% if user.role == "teacher" %}
-<p><a href="{% url 'user:teacher_dashboard' %}">Click here to go to your dashboard.</a></p>
-{% elif user.role == "parent" %}
-<p><a href="{% url 'user:parent_dashboard' %}">Click here to go to your dashboard.</a></p>
+<p>
+    <a href="{% url 'user:teacher_dashboard' %}" aria-label="Go to your teacher dashboard">
+        Click here to go to your dashboard.
+    </a>
+</p>
+<p>
+    <a href="{% url 'user:parent_dashboard' %}" aria-label="Go to your parent dashboard">
+        Click here to go to your dashboard.
+    </a>
+</p>
+
 {% else %}
 <p>Your account doesn’t have a recognised role.</p>
 {% endif %}
 {% else %}
 <p>
-    <a href="{% url 'user:login' %}">Login</a> or
-    <a href="{% url 'user:signup' %}">Sign Up</a>
+    <a href="{% url 'user:login' %}" aria-label="Login to your account">Login</a> or
+    <a href="{% url 'user:signup' %}" aria-label="Sign up for a new account">Sign Up</a>
 </p>
+
 {% endif %}
 {% endblock %}
