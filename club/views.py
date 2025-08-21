@@ -4,13 +4,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from datetime import date
 
+from child.models import Child
 from .models import Club
 from .forms import ClubForm
+from enrollment.models import Enrollment
 
 
 @login_required
 @role_required('teacher')
 def create_club(request):
+    """
+    Create a new club or event managed by the teacher.
+    """
     if request.method == 'POST':
         form = ClubForm(request.POST)
         if form.is_valid():
@@ -85,6 +90,9 @@ def create_club(request):
 @login_required
 @role_required('teacher')
 def list_teacher_clubs(request):
+    """
+    List all clubs managed by the teacher.
+    """
     clubs = Club.objects.filter(teacher=request.user).order_by('-created_at')
     return render(request, 'club/list_teacher_clubs.html', {'clubs': clubs})
 
@@ -92,6 +100,9 @@ def list_teacher_clubs(request):
 @login_required
 @role_required('teacher')
 def manage_single_club(request, club_id):
+    """
+    Manage a single club for the teacher, allowing updates or deletion.
+    """
     club = get_object_or_404(Club, id=club_id, teacher=request.user)
 
     if request.method == 'POST':
@@ -202,6 +213,9 @@ def manage_single_club(request, club_id):
 @login_required
 @role_required('teacher')
 def delete_club_confirm(request, club_id):
+    """
+    Confirm deletion of a club managed by the teacher.
+    """
     club = get_object_or_404(Club, id=club_id, teacher=request.user)
     if request.method == 'POST':
         club.delete()
@@ -214,7 +228,8 @@ def delete_club_confirm(request, club_id):
 @role_required('teacher')
 def view_club_enrollments(request):
     """
-    View all enrollments for clubs managed by the teacher."""
+    View all enrollments for clubs managed by the teacher.
+    """
     clubs = (
         Club.objects
         .filter(teacher=request.user)
@@ -224,3 +239,25 @@ def view_club_enrollments(request):
         'clubs': clubs
     }
     return render(request, 'club/view_club_enrollments.html', context)
+
+
+@login_required
+@role_required('teacher')
+def view_child_details(request, child_id):
+    """
+    Allow a teacher to view details of a child enrolled in their clubs.
+    """
+    # Ensure child is actively enrolled in one of the teacher's clubs
+    enrolled = Enrollment.objects.filter(
+        club__teacher=request.user,
+        child_id=child_id,
+        status="active"
+    ).exists()
+
+    if not enrolled:
+        messages.error(request, "You do not have permission to view this child's details.")
+        return redirect('club:view_club_enrollments')
+
+    child = get_object_or_404(Child, id=child_id)
+
+    return render(request, "club/view_child_details.html", {"child": child})

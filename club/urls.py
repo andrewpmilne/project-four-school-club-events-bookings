@@ -5,6 +5,7 @@ from .views import (
     manage_single_club,
     delete_club_confirm,
     view_club_enrollments,
+    view_child_details,
 )
 
 app_name = 'club'
@@ -17,9 +18,15 @@ urlpatterns = [
         '<int:club_id>/delete/',
         delete_club_confirm,
         name='delete_club_confirm',
-    ),
+        ),
     path(
         'enrollments/',
         view_club_enrollments,
-        name='view_club_enrollments'),
+        name='view_club_enrollments'
+        ),
+    path(
+        "child/<int:child_id>/",
+        view_child_details,
+        name="view_child_details"
+        ),
 ]

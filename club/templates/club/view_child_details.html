@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Child Details{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="mb-4">Child Details</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">{{ child.first_name }} {{ child.surname }}</h5>
+            <p class="card-text"><strong>Date of Birth:</strong> {{ child.date_of_birth|date:"F j, Y" }}</p>
+            {% if child.allergy_info %}
+            <p class="card-text"><strong>Allergy Information:</strong> {{ child.allergy_info }}</p>
+            {% endif %}
+            {% if child.special_needs %}
+            <p class="card-text"><strong>Special Needs:</strong> {{ child.special_needs }}</p>
+            {% endif %}
+            {% if child.emergency_contact_name %}
+            <p class="card-text"><strong>Emergency Contact Name:</strong> {{ child.emergency_contact_name }}</p>
+            {% endif %}
+            {% if child.emergency_contact_phone %}
+            <p class="card-text"><strong>Emergency Contact Phone:</strong> {{ child.emergency_contact_phone }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{% url 'club:view_club_enrollments' %}" class="btn btn-secondary">&larr; Back to Enrollments</a>
+        <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
+    </div>
+</div>
+{% endblock %}
