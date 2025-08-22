@@ -24,7 +24,8 @@
                             {% for enrollment in club.enrollments.all %}
                             {% if enrollment.status == "active" %}
                             <li>
-                                <a href="{% url 'club:view_child_details' enrollment.child.id %}">
+                                <a href="{% url 'club:view_child_details' enrollment.child.id %}"
+                                    aria-label="View details for {{ enrollment.child.first_name }} {{ enrollment.child.surname }}">
                                     {{ enrollment.child.first_name }} {{ enrollment.child.surname }}
                                 </a>
                             </li>

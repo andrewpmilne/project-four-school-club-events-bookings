@@ -10,7 +10,7 @@
 <ul>
     {% for club in clubs %}
     <li>
-        <a href="{% url 'club:manage_single_club' club.id %}">
+        <a href="{% url 'club:manage_single_club' club.id %}" aria-label="Manage {{ club.name }}">
             {{ club.name }}
         </a>
     </li>
@@ -20,7 +20,7 @@
 <p>You haven't created any clubs yet.</p>
 {% endif %}
 
-<a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary mb-3">
+<a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary mb-3" aria-label="Return to teacher dashboard">
     Go back to Dashboard
 </a>
 

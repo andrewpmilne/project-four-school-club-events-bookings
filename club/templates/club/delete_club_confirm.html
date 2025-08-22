@@ -10,7 +10,9 @@
 
 <form method="POST">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Yes, Delete</button>
-    <a href="{% url 'club:manage_single_club' club.id %}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-danger" aria-label="Confirm deletion of club {{ club.name }}">Yes,
+        Delete</button>
+    <a href="{% url 'club:manage_single_club' club.id %}" class="btn btn-secondary"
+        aria-label="Cancel and return to {{ club.name }} management">Cancel</a>
 </form>
 {% endblock %}

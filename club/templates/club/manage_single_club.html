@@ -9,12 +9,16 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="submit" class="btn btn-primary" aria-label="Save changes to {{ club.name }}">Save Changes</button>
 </form>
 
-<a href="{% url 'club:delete_club_confirm' club.id %}" class="btn btn-danger mt-3">
+<a href="{% url 'club:delete_club_confirm' club.id %}" class="btn btn-danger mt-3"
+    aria-label="Delete club {{ club.name }}">
     Delete Club
 </a>
 
-<a href="{% url 'club:list_teacher_clubs' %}" class="btn btn-secondary mt-3">Back to My Clubs</a>
+<a href="{% url 'club:list_teacher_clubs' %}" class="btn btn-secondary mt-3" aria-label="Return to My Clubs list">
+    Back to My Clubs
+</a>
+
 {% endblock %}

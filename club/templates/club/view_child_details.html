@@ -26,8 +26,10 @@
     </div>
 
     <div class="mt-4">
-        <a href="{% url 'club:view_club_enrollments' %}" class="btn btn-secondary">&larr; Back to Enrollments</a>
-        <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
+        <a href="{% url 'club:view_club_enrollments' %}" class="btn btn-secondary"
+            aria-label="Back to club enrollments list">&larr; Back to Enrollments</a>
+        <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-primary" aria-label="Go to teacher dashboard">Go to
+            Dashboard</a>
     </div>
 </div>
 {% endblock %}

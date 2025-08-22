@@ -9,7 +9,8 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary ms-2">Cancel</a>
+    <button type="submit" class="btn btn-primary" aria-label="Create new club or event">Create</button>
+    <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary ms-2"
+        aria-label="Cancel and return to dashboard">Cancel</a>
 </form>
 {% endblock %}
