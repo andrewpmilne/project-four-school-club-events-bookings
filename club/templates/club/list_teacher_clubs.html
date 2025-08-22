@@ -3,25 +3,28 @@
 {% block title %}My Clubs{% endblock %}
 
 {% block content %}
-<h2>My Clubs & Events</h2>
-<p>Click on a club to edit or delete it.</p>
+<div class="text-center my-5">
+    <h2 class="mb-4">My Clubs & Events</h2>
+    <p class="mb-4">Click on a club to edit or delete it.</p>
 
-{% if clubs %}
-<ul>
-    {% for club in clubs %}
-    <li>
-        <a href="{% url 'club:manage_single_club' club.id %}" aria-label="Manage {{ club.name }}">
-            {{ club.name }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>You haven't created any clubs yet.</p>
-{% endif %}
+    {% if clubs %}
+    <ul class="list-unstyled">
+        {% for club in clubs %}
+        <li class="mb-2">
+            <a href="{% url 'club:manage_single_club' club.id %}" class="btn btn-outline-primary w-50"
+                aria-label="Manage {{ club.name }}">
+                {{ club.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="mb-4">You haven't created any clubs yet.</p>
+    {% endif %}
 
-<a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary mb-3" aria-label="Return to teacher dashboard">
-    Go back to Dashboard
-</a>
-
+    <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary mt-3"
+        aria-label="Return to teacher dashboard">
+        Go back to Dashboard
+    </a>
+</div>
 {% endblock %}

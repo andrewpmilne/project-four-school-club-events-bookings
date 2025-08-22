@@ -8,14 +8,15 @@
 
     {% if user.is_authenticated %}
     {% if user.role == "teacher" %}
-    <p class="mb-2">
+    <p>
         <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-primary" aria-label="Go to your teacher dashboard">
             Go to your dashboard
         </a>
     </p>
+    {% elif user.role == "parent" %}
     <p>
-        <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary" aria-label="Go to your parent dashboard">
-            Go to your parent dashboard
+        <a href="{% url 'user:parent_dashboard' %}" class="btn btn-primary" aria-label="Go to your parent dashboard">
+            Go to your dashboard
         </a>
     </p>
     {% else %}

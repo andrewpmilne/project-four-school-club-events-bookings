@@ -1,16 +1,33 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}Create Club/Event{% endblock %}
 
 {% block content %}
-<h2>Create a New Club or Event</h2>
+<div class="d-flex justify-content-center">
+    <div class="w-100" style="max-width: 600px;">
+        <h2 class="text-center mb-4">Create a New Club or Event</h2>
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
+        <form method="POST" novalidate>
+            {% csrf_token %}
 
-    <button type="submit" class="btn btn-primary" aria-label="Create new club or event">Create</button>
-    <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary ms-2"
-        aria-label="Cancel and return to dashboard">Cancel</a>
-</form>
+            {% for field in form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                <div class="text-danger small">
+                    {{ field.errors|striptags }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" aria-label="Create new club or event">Create</button>
+                <a href="{% url 'user:teacher_dashboard' %}" class="btn btn-secondary ms-2"
+                    aria-label="Cancel and return to dashboard">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
