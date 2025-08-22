@@ -34,9 +34,11 @@
         {% endif %}
     </div>
 
-    <button type="submit" class="btn btn-primary">Enroll</button>
+    <button type="submit" class="btn btn-primary"
+        aria-label="Enroll selected child in selected club or event">Enroll</button>
 </form>
 
-<a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+<a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mt-3" aria-label="Return to parent dashboard">Back
+    to Dashboard</a>
 
 {% endblock %}

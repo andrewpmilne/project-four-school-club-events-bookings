@@ -6,8 +6,8 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Add Child</button>
+    <button type="submit" class="btn btn-success" aria-label="Add new child profile">Add Child</button>
 </form>
 
-<a href="{% url 'user:parent_dashboard' %}">Back to Dashboard</a>
+<a href="{% url 'user:parent_dashboard' %}" aria-label="Return to parent dashboard">Back to Dashboard</a>
 {% endblock %}

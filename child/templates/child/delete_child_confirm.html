@@ -8,7 +8,9 @@
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Yes, Delete</button>
-    <a href="{% url 'child:edit_child' child.id %}" class="btn btn-secondary ms-2">Cancel</a>
+    <button type="submit" class="btn btn-danger"
+        aria-label="Confirm deletion of {{ child.first_name }} {{ child.surname }}">Yes, Delete</button>
+    <a href="{% url 'child:edit_child' child.id %}" class="btn btn-secondary ms-2"
+        aria-label="Cancel and return to edit page for {{ child.first_name }} {{ child.surname }}">Cancel</a>
 </form>
 {% endblock %}

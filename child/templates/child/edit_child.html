@@ -9,8 +9,12 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-    <a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary ms-2">Cancel</a>
-    <a href="{% url 'child:delete_child' child.id %}" class="btn btn-danger ms-2">Delete Child</a>
+    <button type="submit" class="btn btn-primary"
+        aria-label="Save changes to {{ child.first_name }} {{ child.surname }}">Save Changes</button>
+    <a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary ms-2"
+        aria-label="Cancel and return to children list">Cancel</a>
+    <a href="{% url 'child:delete_child' child.id %}" class="btn btn-danger ms-2"
+        aria-label="Delete {{ child.first_name }} {{ child.surname }}">Delete Child</a>
 </form>
+
 {% endblock %}
