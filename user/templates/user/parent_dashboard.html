@@ -3,17 +3,42 @@
 {% block title %}Parent Dashboard{% endblock %}
 
 {% block content %}
+<div class="text-center">
+    <h2>Welcome to the Parent Dashboard</h2>
+    <p aria-label="Dashboard instructions">
+        This is where parents can create and edit children and enroll in events.
+    </p>
 
-<h2>Welcome to the Parent Dashboard</h2>
-<p aria-label="Dashboard instructions">This is where parents can create and edit children and enroll in events.</p>
-<a href="{% url 'child:create_child' %}" class="btn btn-primary" aria-label="Create a new child record">Create
-    Children</a>
-<a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary"
-    aria-label="View or edit existing children">View/Edit Children</a>
-<a href="{% url 'enrollment:create_enrollment' %}" class="btn btn-success"
-    aria-label="Enroll children in clubs or events">Enroll children in clubs/events</a>
-<a href="{% url 'child:view_all_clubs' %}" class="btn btn-info me-2"
-    aria-label="View the list of all available clubs">View List of All Clubs</a>
-<a href="{% url 'user:logout' %}" class="btn btn-danger" aria-label="Logout from the dashboard">Logout</a>
-
+    <div class="row g-3 justify-content-center mt-4">
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'child:create_child' %}" class="btn btn-primary btn-lg"
+                aria-label="Create a new child record">
+                Create Children
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary btn-lg"
+                aria-label="View or edit existing children">
+                View/Edit Children
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'enrollment:create_enrollment' %}" class="btn btn-primary btn-lg"
+                aria-label="Enroll children in clubs or events">
+                Enroll in Clubs/Events
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'child:view_all_clubs' %}" class="btn btn-secondary btn-lg"
+                aria-label="View the list of all available clubs">
+                View All Clubs
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'user:logout' %}" class="btn btn-danger btn-lg" aria-label="Logout from the dashboard">
+                Logout
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -3,24 +3,33 @@
 {% block title %}Teacher Dashboard{% endblock %}
 
 {% block content %}
-<h2>Welcome to the Teacher Dashboard</h2>
-<p>This is where teachers will manage clubs and events.</p>
+<div class="text-center">
+    <h2>Welcome to the Teacher Dashboard</h2>
+    <p>This is where teachers will manage clubs and events.</p>
 
-<a href="{% url 'club:create_club' %}" class="btn btn-primary mt-3" aria-label="Create a new club or event">
-    Create Club/Event
-</a>
-
-<a href="{% url 'club:list_teacher_clubs' %}" class="btn btn-secondary mt-3" aria-label="Manage your existing clubs">
-    Manage My Clubs
-</a>
-
-<a href="{% url 'club:view_club_enrollments' %}" class="btn btn-info me-2"
-    aria-label="View information about enrolled children in your clubs">
-    View My Clubs Information
-</a>
-
-<a href="{% url 'user:logout' %}" class="btn btn-danger" aria-label="Log out of your account">
-    Logout
-</a>
-
+    <div class="row justify-content-center mt-4 g-3">
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'club:create_club' %}" class="btn btn-primary" aria-label="Create a new club or event">
+                Create Club/Event
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'club:list_teacher_clubs' %}" class="btn btn-outline-primary"
+                aria-label="Manage your existing clubs">
+                Manage My Clubs
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'club:view_club_enrollments' %}" class="btn btn-primary"
+                aria-label="View information about enrolled children in your clubs">
+                View My Clubs Information
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 d-grid">
+            <a href="{% url 'user:logout' %}" class="btn btn-danger" aria-label="Log out of your account">
+                Logout
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

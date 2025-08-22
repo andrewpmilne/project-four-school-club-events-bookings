@@ -15,6 +15,12 @@ class SignupForm(forms.ModelForm):
         model = User
         fields = ['email', 'first_name', 'surname', 'role']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add Bootstrap class to all fields
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
     # validation for the signup form
     def clean(self):
         """
@@ -80,6 +86,24 @@ class EmailAuthenticationForm(AuthenticationForm):
     Custom authentication form that uses an email field
     instead of the default username field.
     """
-    username = forms.EmailField(label='Email',
-                                widget=forms.EmailInput
-                                (attrs={'autofocus': True}))
+    username = forms.EmailField(
+        label='Email',
+        widget=forms.EmailInput(
+            attrs={
+                'autofocus': True,
+                'class': 'form-control',
+                'placeholder': 'Enter your email'
+            }
+        )
+    )
+
+    password = forms.CharField(
+        label='Password',
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your password'
+            }
+        )
+    )

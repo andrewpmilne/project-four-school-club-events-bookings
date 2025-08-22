@@ -3,24 +3,35 @@
 {% block title %}Sign Up - School Clubs and Events{% endblock %}
 
 {% block content %}
+<h2 class="text-center mb-4">Sign Up</h2>
 
-<h2>Sign Up</h2>
-
-<p>
+<p class="text-center">
     <a href="{% url 'user:login' %}">Click here to login if already registered</a>
 </p>
 
 <form method="POST" class="mt-3">
     {% csrf_token %}
 
-    <p>
-        Password must be at least 8 characters long, and include at least one uppercase letter, one number, and one
-        special character.
+    <p class="small text-muted">
+        Password must be at least 8 characters long, include one uppercase letter, one number, and one special
+        character.
     </p>
 
-    {{ form.as_p }}
+    {% for field in form %}
+    <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+        <div class="text-danger small">
+            {{ field.errors|striptags }}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
 
-    <button type="submit" class="btn btn-primary">Sign Up</button>
-    <a href="{% url 'user:home' %}" class="btn btn-secondary ms-2">Back</a>
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <a href="{% url 'user:home' %}" class="btn btn-secondary ms-2">Back</a>
+    </div>
 </form>
 {% endblock %}
