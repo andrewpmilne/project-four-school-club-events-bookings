@@ -1,1 +1,1 @@
-web gunicorn school_clubs_events.wsgi
+web: gunicorn school_clubs_events.wsgi

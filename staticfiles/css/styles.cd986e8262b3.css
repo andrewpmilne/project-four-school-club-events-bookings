@@ -1,0 +1,34 @@
+:root {
+    --bs-body-font-family: 'Open Sans', sans-serif;
+    --bs-heading-font-family: 'Merriweather', serif;
+}
+
+/* Body text uses Open Sans (sans-serif) */
+body,
+p,
+label,
+a,
+li {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Headings use Merriweather (serif) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Merriweather', serif;
+}
+
+/* line-height and spacing for readability */
+body {
+    line-height: 1.6;
+}
+
+/* style card titles */
+.card-title {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+}
