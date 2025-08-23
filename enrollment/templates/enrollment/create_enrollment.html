@@ -3,42 +3,51 @@
 {% block title %}Enroll Child in Club/Event{% endblock %}
 
 {% block content %}
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h2 class="mb-3">Enroll a Child in a Club or Event</h2>
+    </div>
 
-{% if form.non_field_errors %}
-<div class="alert alert-danger">
-    {% for error in form.non_field_errors %}
-    {{ error }}<br>
-    {% endfor %}
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger text-center w-75 mx-auto">
+        {% for error in form.non_field_errors %}
+        {{ error }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Centered enrollment form -->
+    <div class="d-flex justify-content-center">
+        <form method="post" class="w-100" style="max-width: 500px;">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.child.label_tag }}
+                {{ form.child }}
+                {% if form.child.errors %}
+                <div class="text-danger small">{{ form.child.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.club.label_tag }}
+                {{ form.club }}
+                {% if form.club.errors %}
+                <div class="text-danger small">{{ form.club.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary"
+                    aria-label="Return to parent dashboard">
+                    Back to Dashboard
+                </a>
+                <button type="submit" class="btn btn-primary"
+                    aria-label="Enroll selected child in selected club or event">
+                    Enroll
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-{% endif %}
-
-
-<h2>Enroll a Child in a Club or Event</h2>
-
-<!-- Enrollment form -->
-<form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        {{ form.child.label_tag }}
-        {{ form.child }}
-        {% if form.child.errors %}
-        <div class="text-danger">{{ form.child.errors }}</div>
-        {% endif %}
-    </div>
-
-    <div class="form-group">
-        {{ form.club.label_tag }}
-        {{ form.club }}
-        {% if form.club.errors %}
-        <div class="text-danger">{{ form.club.errors }}</div>
-        {% endif %}
-    </div>
-
-    <button type="submit" class="btn btn-primary"
-        aria-label="Enroll selected child in selected club or event">Enroll</button>
-</form>
-
-<a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mt-3" aria-label="Return to parent dashboard">Back
-    to Dashboard</a>
-
 {% endblock %}

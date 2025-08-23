@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 
+{% block title %}Create a Child{% endblock %}
+
 {% block content %}
-<h2>Create a Child</h2>
+<div class="container my-5 d-flex justify-content-center">
+    <div class="w-100" style="max-width: 600px;">
+        <h2 class="text-center mb-4">Create a Child</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success" aria-label="Add new child profile">Add Child</button>
-</form>
-
-<a href="{% url 'user:parent_dashboard' %}" aria-label="Return to parent dashboard">Back to Dashboard</a>
+        <form method="post" class="card shadow-sm p-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary"
+                    aria-label="Return to parent dashboard">
+                    Back to Dashboard
+                </a>
+                <button type="submit" class="btn btn-primary" aria-label="Add new child profile">
+                    Add Child
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

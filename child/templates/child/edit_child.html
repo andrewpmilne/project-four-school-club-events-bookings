@@ -3,18 +3,29 @@
 {% block title %}Edit {{ child.first_name }}{% endblock %}
 
 {% block content %}
-<h2>Edit {{ child.first_name }} {{ child.surname }}</h2>
+<div class="container my-4">
+    <h2 class="text-center mb-4">Edit {{ child.first_name }} {{ child.surname }}</h2>
 
-<form method="post" class="mt-3">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <div class="d-flex justify-content-center">
+        <form method="post" class="w-100" style="max-width: 500px;">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-    <button type="submit" class="btn btn-primary"
-        aria-label="Save changes to {{ child.first_name }} {{ child.surname }}">Save Changes</button>
-    <a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary ms-2"
-        aria-label="Cancel and return to children list">Cancel</a>
-    <a href="{% url 'child:delete_child' child.id %}" class="btn btn-danger ms-2"
-        aria-label="Delete {{ child.first_name }} {{ child.surname }}">Delete Child</a>
-</form>
-
+            <div class="mt-4 text-center">
+                <button type="submit" class="btn btn-primary me-2"
+                    aria-label="Save changes to {{ child.first_name }} {{ child.surname }}">
+                    Save Changes
+                </button>
+                <a href="{% url 'child:view_children_cards' %}" class="btn btn-secondary me-2"
+                    aria-label="Cancel and return to children list">
+                    Cancel
+                </a>
+                <a href="{% url 'child:delete_child' child.id %}" class="btn btn-danger"
+                    aria-label="Delete {{ child.first_name }} {{ child.surname }}">
+                    Delete Child
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -3,17 +3,18 @@
 {% block title %}View/Edit Children{% endblock %}
 
 {% block content %}
-<div class="container my-4">
-    <h2 class="mb-3">Your Children</h2>
-    <p class="mb-4">Click on a child to edit or delete their details.</p>
-
-    <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mb-4">Back to Dashboard</a>
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h2 class="mb-3">Your Children</h2>
+        <p class="mb-4">Click on a child to edit or delete their details.</p>
+    </div>
 
     {% if children %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for child in children %}
         <div class="col">
-            <a href="{% url 'child:edit_child' child.id %}" class="text-decoration-none text-dark">
+            <a href="{% url 'child:edit_child' child.id %}" class="text-decoration-none text-dark"
+                aria-label="Edit or delete details for {{ child.first_name }} {{ child.surname }}">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">{{ child.first_name }} {{ child.surname }}</h5>
@@ -29,7 +30,13 @@
         {% endfor %}
     </div>
     {% else %}
-    <p>No children added yet.</p>
+    <p class="text-center mt-4">No children added yet.</p>
     {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary" aria-label="Return to parent dashboard">
+            Back to Dashboard
+        </a>
+    </div>
 </div>
 {% endblock %}

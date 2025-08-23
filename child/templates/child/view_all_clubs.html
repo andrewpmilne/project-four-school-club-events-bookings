@@ -3,10 +3,9 @@
 {% block title %}All Clubs & Events{% endblock %}
 
 {% block content %}
-<div class="container my-4">
+<div class="container my-4 text-center">
     <h2 class="mb-4">All Clubs & Events</h2>
-
-    <p class="mb-3">Click on a club to enroll a child.</p>
+    <p class="mb-4">Click on a club to enroll a child.</p>
 
     {% if clubs %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -19,22 +18,25 @@
                         <h5 class="card-title">{{ club.name }}</h5>
                         <span class="badge bg-primary mb-2">{{ club.get_club_or_event_display }}</span>
                         <span class="badge bg-info text-dark mb-2">{{ club.get_frequency_display }}</span>
+
                         {% if club.min_age or club.max_age %}
                         <p class="mb-1"><strong>Age:</strong>
-                            {% if club.min_age %}{{ club.min_age }}{% else %}Any{% endif %}
-                            -
+                            {% if club.min_age %}{{ club.min_age }}{% else %}Any{% endif %} -
                             {% if club.max_age %}{{ club.max_age }}{% else %}Any{% endif %} years
                         </p>
                         {% endif %}
+
                         <p class="mb-1"><strong>Time:</strong>
                             {{ club.start_time|time:"H:i" }} - {{ club.end_time|time:"H:i" }}
                         </p>
+
                         {% if club.start_date %}
                         <p class="mb-1"><strong>Start:</strong> {{ club.start_date|date:"d M Y" }}</p>
                         {% endif %}
                         {% if club.end_date %}
                         <p class="mb-1"><strong>End:</strong> {{ club.end_date|date:"d M Y" }}</p>
                         {% endif %}
+
                         <p class="mb-1"><strong>Teacher:</strong>
                             {{ club.teacher.first_name }} {{ club.teacher.surname }}
                         </p>
@@ -47,11 +49,15 @@
         {% endfor %}
     </div>
     {% else %}
-    <p>No clubs or events available at the moment.</p>
+    <p class="mt-4">No clubs or events available at the moment.</p>
     {% endif %}
 
-    <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mb-4" aria-label="Return to parent dashboard">
-        &larr; Back to Dashboard
-    </a>
+    <!-- Centered Back Button -->
+    <div class="mt-5">
+        <a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary px-4"
+            aria-label="Return to parent dashboard">
+            Back to Dashboard
+        </a>
+    </div>
 </div>
 {% endblock %}
