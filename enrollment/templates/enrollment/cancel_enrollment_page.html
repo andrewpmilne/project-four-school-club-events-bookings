@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Cancel Enrollment{% endblock %}
+
+{% block content %}
+<h2 id="cancel-enrollment-heading">Cancel an Enrollment</h2>
+<p id="cancel-enrollment-instructions">Select an enrollment to cancel:</p>
+
+<ul class="list-group" aria-labelledby="cancel-enrollment-heading">
+    {% for enrollment in enrollments %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span aria-label="Enrollment: {{ enrollment.child.name }} enrolled in {{ enrollment.club.name }}">
+            {{ enrollment.child.name }} - {{ enrollment.club.name }}
+        </span>
+        <a href="{% url 'enrollment:cancel_enrollment' enrollment.id %}" class="btn btn-danger btn-sm"
+            aria-label="Cancel enrollment for {{ enrollment.child.name }} in {{ enrollment.club.name }}">
+            Cancel
+        </a>
+    </li>
+    {% empty %}
+    <li class="list-group-item" aria-label="No enrollments found">No enrollments found.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mt-3" aria-label="Back to Parent Dashboard">
+    Back to Dashboard
+</a>
+{% endblock %}
