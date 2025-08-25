@@ -62,7 +62,8 @@
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'user:login' %}">Login</a>
+                            <a class="nav-link text-white" aria-label="Login to your account"
+                                href="{% url 'user:login' %}">Login</a>
                         </li>
                         {% endif %}
                     </ul>
