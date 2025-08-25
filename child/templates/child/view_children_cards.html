@@ -19,9 +19,22 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ child.first_name }} {{ child.surname }}</h5>
                         <p class="card-text mb-1"><strong>Date of Birth:</strong> {{ child.date_of_birth }}</p>
+
                         {% if child.notes %}
                         <p class="card-text">{{ child.notes|truncatechars:100 }}</p>
                         {% endif %}
+
+                        {% if child.enrollments.exists %}
+                        <p class="card-text mb-1"><strong>Enrolled Clubs/Events:</strong></p>
+                        <ul class="mb-1">
+                            {% for enrollment in child.enrollments.all %}
+                            <li>{{ enrollment.club.name }} ({{ enrollment.status }})</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="card-text mb-1"><em>No enrollments yet.</em></p>
+                        {% endif %}
+
                         <p class="card-text text-muted"><small>Click to edit or delete</small></p>
                     </div>
                 </div>
