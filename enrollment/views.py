@@ -179,6 +179,9 @@ def cancel_enrollment_page(request):
     enrollments = Enrollment.objects.filter(child__parent=request.user)
     return render(request, 'enrollment/cancel_enrollment_page.html', {'enrollments': enrollments})
 
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+
 @role_required('parent')
 def cancel_enrollment(request, enrollment_id):
     """
@@ -186,4 +189,8 @@ def cancel_enrollment(request, enrollment_id):
     """
     enrollment = get_object_or_404(Enrollment, id=enrollment_id, child__parent=request.user)
     enrollment.delete()
+
+    messages.success(request, "Enrollment cancelled successfully!")
+
     return redirect('enrollment:cancel_enrollment_page')
+
