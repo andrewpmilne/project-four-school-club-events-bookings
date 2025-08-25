@@ -1,6 +1,5 @@
 from django.test import TestCase
 from user.forms import SignupForm
-from user.models import User
 from django.contrib.auth import get_user_model
 from user.forms import EmailAuthenticationForm
 
@@ -19,17 +18,16 @@ class SignupFormTests(TestCase):
             'password_confirm': 'StrongPass1!',
         }
         form = SignupForm(data=form_data)
-        self.assertTrue(form.is_valid(), form.errors)  
+        self.assertTrue(form.is_valid(), form.errors)
 
         user = form.save()
-        self.assertEqual(User.objects.count(), 1) 
+        self.assertEqual(User.objects.count(), 1)
         self.assertEqual(user.email, 'parent@example.com')
-        self.assertTrue(user.check_password('StrongPass1!')) 
+        self.assertTrue(user.check_password('StrongPass1!'))
         self.assertEqual(user.role, 'parent')
 
-
     def test_teacher_signup_form_creates_user(self):
-        """SignupForm should create a teacher user 
+        """SignupForm should create a teacher user
         with a valid .sch.uk email"""
         form_data = {
             'email': 'teacher@school.sch.uk',
@@ -48,12 +46,13 @@ class SignupFormTests(TestCase):
         self.assertTrue(user.check_password('StrongPass1!'))
         self.assertEqual(user.role, 'teacher')
 
+
 class LoginFormTests(TestCase):
 
     def test_login_form_valid_credentials(self):
         """Form should be valid if email and password match a user"""
         # Create a test user
-        user = User.objects.create_user(
+        User.objects.create_user(
             email='testuser@example.com',
             password='TestPass123!',
             first_name='Test',

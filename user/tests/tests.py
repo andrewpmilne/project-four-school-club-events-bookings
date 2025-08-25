@@ -2,10 +2,14 @@ from django.test import TestCase
 from django.urls import reverse
 from user.models import User
 
+
 class SignupViewTests(TestCase):
 
     def test_signup_parent_success(self):
-        """POST with valid parent data should create user and redirect to login"""
+        """
+        POST with valid parent data should create
+        user and redirect to login
+        """
         url = reverse('user:signup')
         data = {
             'email': 'parent@example.com',

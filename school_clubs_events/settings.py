@@ -91,15 +91,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'school_clubs_events.wsgi.application'
 
 
-# Database
+# Database - information commented out for use in future as testing database
+
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# if "DATABASE_URL" in os.environ:
-#    print("database = PostgreSQL via Heroku")
-#    DATABASES = {
-#        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
-#    }
-# else:
 #    print("database = db.sqlite3")
 #    DATABASES = {
 #        "default": {
