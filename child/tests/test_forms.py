@@ -2,7 +2,7 @@ from django.test import TestCase
 from child.forms import ChildForm
 from child.models import Child
 from user.models import User
-from datetime import date
+
 
 class ChildFormTests(TestCase):
 
@@ -38,6 +38,7 @@ class ChildFormTests(TestCase):
         self.assertEqual(child.first_name, 'Bukayo')
         self.assertEqual(child.surname, 'Saka')
         self.assertEqual(child.parent, parent)
+
 
 class ChildFormValidationTests(TestCase):
 

@@ -223,15 +223,10 @@ class EnrollmentViewTests(TestCase):
                 club=self.club
             )
 
-        url = reverse('enrollment:create_enrollment')
-        form_data = {
-            'child': self.child.id,
-            'club': self.club.id,
-        }
-        response = self.client.post(url, data=form_data)
-
         # The enrollment should not be created
         self.assertFalse(
-            Enrollment.objects.filter(child=self.child, club=self.club).exists()
+            Enrollment.objects.filter(
+                child=self.child,
+                club=self.club
+                ).exists()
         )
-

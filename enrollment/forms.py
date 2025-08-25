@@ -61,7 +61,7 @@ class EnrollmentForm(forms.ModelForm):
                     f"{club.capacity} children."
                 )
             )
-        
+
         # Time conflict check
         conflicting_enrollments = Enrollment.objects.filter(
             child=child,
@@ -70,9 +70,11 @@ class EnrollmentForm(forms.ModelForm):
         ).exclude(club=club)
 
         for e in conflicting_enrollments:
-            if club.start_time < e.club.end_time and club.end_time > e.club.start_time:
+            if (club.start_time < e.club.end_time
+                    and club.end_time > e.club.start_time):
                 raise ValidationError(
-                    f"{child.first_name} {child.surname} is already enrolled in "
+                    f"{child.first_name} {child.surname} "
+                    "is already enrolled in "
                     f"{e.club.name} which overlaps with {club.name}."
                 )
 

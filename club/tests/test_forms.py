@@ -6,6 +6,7 @@ from datetime import date, time, timedelta
 
 User = get_user_model()
 
+
 class ClubFormTest(TestCase):
     def setUp(self):
         # Create a teacher user
@@ -65,7 +66,7 @@ class ClubFormTest(TestCase):
         }
 
         form = ClubForm(data=data)
-        
+
         # Form should be invalid
         self.assertFalse(form.is_valid())
 
@@ -107,4 +108,3 @@ class ClubFormTest(TestCase):
             form.errors['start_date'][0],
             'Start date cannot be in the past.'
         )
-

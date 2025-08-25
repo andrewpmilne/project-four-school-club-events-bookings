@@ -6,6 +6,7 @@ from club.models import Club
 
 User = get_user_model()
 
+
 class ClubViewsTest(TestCase):
     def setUp(self):
         # Create a teacher user
@@ -48,7 +49,10 @@ class ClubViewsTest(TestCase):
         """
         POST request with valid data should create a club and redirect.
         """
-        response = self.client.post(reverse('club:create_club'), data=self.valid_club_data)
+        response = self.client.post(
+            reverse('club:create_club'),
+            data=self.valid_club_data
+            )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Club.objects.filter(name='Chess Club').exists())
 
@@ -61,7 +65,10 @@ class ClubViewsTest(TestCase):
         data['max_age'] = 12
         response = self.client.post(reverse('club:create_club'), data=data)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Maximum age must be greater than or equal to minimum age.')
+        self.assertContains(
+            response,
+            'Maximum age must be greater than or equal to minimum age.'
+            )
         self.assertFalse(Club.objects.filter(name='Chess Club').exists())
 
     def test_list_teacher_clubs(self):
@@ -76,8 +83,8 @@ class ClubViewsTest(TestCase):
             min_age=8,
             max_age=15,
             capacity=10,
-            start_time=time(15,0),
-            end_time=time(16,0),
+            start_time=time(15, 0),
+            end_time=time(16, 0),
             start_date=date.today(),
             end_date=date.today(),
             frequency='one-off'

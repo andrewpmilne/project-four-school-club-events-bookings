@@ -255,7 +255,10 @@ def view_child_details(request, child_id):
     ).exists()
 
     if not enrolled:
-        messages.error(request, "You do not have permission to view this child's details.")
+        messages.error(
+            request,
+            "You do not have permission to view this child's details."
+            )
         return redirect('club:view_club_enrollments')
 
     child = get_object_or_404(Child, id=child_id)
