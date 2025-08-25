@@ -17,7 +17,6 @@ class SignupForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Add Bootstrap class to all fields
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
 
@@ -45,7 +44,7 @@ class SignupForm(forms.ModelForm):
         if role == 'teacher':
             if email and not email.endswith('.sch.uk'):
                 self.add_error(
-                    'email', "Teachers must sign up with an"
+                    'email', "Teachers must sign up with an "
                     "email address ending in '.sch.uk'.")
 
         password = cleaned_data.get('password')
