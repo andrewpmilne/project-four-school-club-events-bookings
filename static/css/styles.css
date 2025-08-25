@@ -48,3 +48,12 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.card-hover .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-hover:hover .card {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}

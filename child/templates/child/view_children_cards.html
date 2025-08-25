@@ -13,7 +13,7 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for child in children %}
         <div class="col">
-            <a href="{% url 'child:edit_child' child.id %}" class="text-decoration-none text-dark"
+            <a href="{% url 'child:edit_child' child.id %}" class="text-decoration-none text-dark card-hover"
                 aria-label="Edit or delete details for {{ child.first_name }} {{ child.surname }}">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
@@ -52,4 +52,17 @@
         </a>
     </div>
 </div>
+
+<!-- Optional: Add custom hover CSS 
+<style>
+.card-hover .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card-hover:hover .card {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+</style>
+-->
+
 {% endblock %}
