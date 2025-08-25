@@ -42,10 +42,12 @@
 
         </div>
         <div class="col-12 col-sm-6 d-grid">
-            <a href="{% url 'user:logout' %}" class="btn btn-danger btn-lg" aria-label="Logout from the dashboard">
+            <a href="{% url 'user:logout' %}" id="parentDashboardLogoutBtn" class="btn btn-danger btn-lg js-logout"
+                aria-label="Logout from the dashboard">
                 Logout
             </a>
         </div>
+
     </div>
 </div>
 {% endblock %}
