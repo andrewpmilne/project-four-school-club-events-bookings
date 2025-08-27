@@ -208,25 +208,84 @@ The project relies on the following Python packages (as specified in `requiremen
 - **Forgotten password functionality:** This version of the app does not include a password reset feature, as no personal email was attached for security reasons. In a professional or production setting, this functionality could be implemented to allow users to reset their passwords securely via email.
 - **Custom User model naming:** The project currently uses a custom `User` model, which clashes with Django's built-in `User` class. Renaming the custom model (e.g., to `CustomUser`) would avoid potential confusion or import conflicts in future versions.
 
+## Testing
 
+Please refer to [TESTING.md](./TESTING.md) for a detailed description of the testing procedures and results for this project.
 
+## Deployment
 
+### Database
 
+- Sign up for a cloud-hosted PostgreSQL provider (e.g., Render, Heroku Postgres).  
+- Create a new database instance via the provider's dashboard.  
+- The provider will generate a connection URL or credentials, often sent to your email.  
+- Copy the connection URL and update the Django `settings.py` database settings accordingly.  
+- Apply migrations to set up the database schema:  
+  ```bash
+  python manage.py makemigrations
+  python manage.py migrate
 
+### App
 
+- Sign up for a Heroku account and install the Heroku CLI on your local machine.  
+- Log in via the CLI:  
+  ```bash
+  heroku login
 
+- Create a new Heroku app:
+  ```bash
+  heroku create your-app-name
 
+- Add the PostgreSQL add-on to your app (using the free `hobby-dev` plan for development/testing)::
+  ```bash
+  heroku addons:create heroku-postgresql:hobby-dev
 
+- Copy the database connection URL from Heroku or your database provider and update Django settings.py accordingly.
 
+- Set any necessary config variables (environment variables) on Heroku, such as:
 
+  - DEBUG=False
 
+  - ALLOWED_HOSTS=your-app-name.herokuapp.com
 
+  - SECRET_KEY=<your_secret_key>
 
+- Push your code to Heroku
+  ```bash
+  git push heroku main
 
+- Apply Django migrations on Heroku
+  ```bash
+  heroku run python manage.py migrate
 
+- Collect static files for production
+  ```bash
+  heroku run python manage.py collectstatic
 
+- Open your deployed app in the browser
+  ```bash
+  heroku open
 
+- Test the application to ensure everything works correctly, including database connections and static files.
 
+## Credits
 
+- [**Django**](https://www.djangoproject.com/): Python framework used for server-side logic and backend management.  
+- [**Bootstrap**](https://getbootstrap.com/): CSS framework used to create responsive, mobile-first layouts and styling.  
+- [**Django-allauth**](https://django-allauth.readthedocs.io/): Authentication library used for managing user accounts.  
+- [**PostgreSQL**](https://www.postgresql.org/): Database used to store all application data.  
+- [**GitHub**](https://github.com/): Platform used to host the project's source code.  
+- [**Heroku**](https://www.heroku.com/): Cloud platform used to deploy and host the website.  
+- [**Render**](https://render.com/): Cloud platform used to host the website.  
+- [**Google Fonts**](https://fonts.google.com/): Provided fonts used in the website.  
+- [**Icons8**](https://icons8.com/): Used to create and source icons for the website.  
+- [**dbdiagram.io**](https://dbdiagram.io/home): Used to create the ERD.  
+- [**Chrome DevTools**](https://developer.chrome.com/docs/devtools/): Used to debug and inspect the website.  
+- [**ChatGPT**](https://chat.openai.com/): Used for research, debugging guidance and clarifying concepts.  
+- [**Stack Overflow**](https://stackoverflow.com/): Used for research and problem-solving during development.
 
+### Thanks
 
+- **Juliia Konovalova** – My mentor, for helping to condense this project to make it manageable and providing endless invaluable tips.  
+- **Carl Vatcha** – My friend, for testing and support.  
+- **My family** – For allowing me the time to tinker away on the computer!
