@@ -36,7 +36,9 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'user:home' %}">School Clubs and Events</a>
+                <a class="navbar-brand hover-effect" href="{% url 'user:home' %}">
+                    School Clubs and Events
+                </a>
 
                 <!-- Toggler button for small screens -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -62,7 +64,7 @@
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" aria-label="Login to your account"
+                            <a class="nav-link hover-effect" aria-label="Login to your account"
                                 href="{% url 'user:login' %}">Login</a>
                         </li>
                         {% endif %}

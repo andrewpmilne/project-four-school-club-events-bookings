@@ -57,3 +57,13 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
+
+.hover-effect {
+    color: #ffffff;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.hover-effect:hover {
+    color: #cccccc;
+    transform: scale(1.05);
+}
