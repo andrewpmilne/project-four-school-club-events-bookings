@@ -21,7 +21,7 @@ See the screenshot below for examples of the test results:
 ![Unit Test Results](readme_resources/testing/unit_test_results.png)
 
 ### JavaScript Testing
-Node.js was used as the runtime environment to execute the JavaScript tests. By leveraging Node, the project was able to run automated tests on the frontend code outside of a browser environment. This approach allowed the test runner, Jest, to simulate and validate the functionality of JavaScript modules and scripts efficiently, ensuring that expected behaviors were met without manual intervention.
+Node.js was used as the runtime environment to execute the JavaScript tests. By leveraging Node, the project was able to run automated tests on the frontend code. The test results can be seen in the below screenshot:
 
 ![JavaScript Test Results](readme_resources/testing/js_test_results.png)
 
@@ -104,3 +104,15 @@ Manual testing was performed throughout development to complement the automated 
 | 9          | Cancel an enrollment                               | Enrollment deleted; success message displayed; redirected to cancel enrollment page| Y   |
 | 10         | Navigate to "Enroll in specific club" card        | Enrollment form displayed with selected club pre-filled                           | Y   |
 | 11         | Check child dropdown is limited to parent’s children | Only parent’s children are listed in dropdown                                     | Y   |
+
+### Responsiveness
+The responsiveness of the site was tested in all pages on various screen sizes. See the below gifs as evidence of readable and clear screens at different sizes.
+
+![Responsiveness - Parent Dashboard](readme_resources/testing/responsiveness_parent_dashboard.gif)
+
+![Responsiveness - Teacher Dashboard](readme_resources/testing/responsiveness_teacher_dashboard.gif)
+
+![Responsiveness - View Clubs](readme_resources/testing/responsiveness_view_clubs.gif)
+
+### Browsers
+The product was tested in Edge, Chrome and Firefox as well as on Safari on an iOS device. 
