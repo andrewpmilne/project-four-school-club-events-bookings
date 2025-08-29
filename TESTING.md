@@ -116,3 +116,21 @@ The responsiveness of the site was tested in all pages on various screen sizes. 
 
 ### Browsers
 The product was tested in Edge, Chrome and Firefox as well as on Safari on an iOS device. 
+
+## Validators
+The W3C html validator was used to validate all html files.
+[W3C CSS Validator](https://validator.w3.org/#validate_by_input)
+
+The W3V css validator was used for style.css.
+[W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
+
+The JShint validator was used for script.js.
+[JSHint](https://jshint.com/)
+
+The Code Institute Python Linter was used for all python files.
+[PEP8 Online Checker](https://pep8ci.herokuapp.com/)
+
+all files passed validation, most with no errors. A few minor comments were found; explanations for which can be found in the screenshots below.
+
+A full list of validation screenshots can be found [here](readme_resources/testing/validators/validators.pdf).
+
