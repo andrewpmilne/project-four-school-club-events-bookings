@@ -139,6 +139,15 @@ class CustomLoginView(LoginView):
             return reverse_lazy('user:parent_dashboard')
         return reverse_lazy('user:home')
 
+    def form_invalid(self, form):
+        """
+        Called when login fails. Add an error message.
+        """
+        messages.error(
+            self.request, "Invalid username or password. Please try again."
+            )
+        return super().form_invalid(form)
+
 
 @login_required
 @role_required('teacher')
