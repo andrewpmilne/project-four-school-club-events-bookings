@@ -60,3 +60,23 @@ Parents can enroll their children into clubs or events through a guided form. Th
 Parents can view all current enrollments for their children and cancel them if needed. Each cancellation includes server-side checks to ensure only authorised parents can remove an enrollment. Upon successful cancellation, a confirmation message is displayed, and the enrollment is removed from the parent's dashboard.
 
 ![Cancel Enrollment](readme_resources/pages/cancel_enrollment.png)
+
+## Validations
+For all forms in the project, a number of validations were necessary to avoid user error and incorrect data being processed into the system. See the below screenshots for a number of examples of these: 
+
+![Signup Email](readme_resources/pages/validations/signup_email.png)
+
+![Signup Password](readme_resources/pages/validations/signup_password.png)
+
+![Create Child Age](readme_resources/pages/validations/create_child_age.png)
+
+![Create Child Phone](readme_resources/pages/validations/create_child_phone.png)
+
+![Create Club Age](readme_resources/pages/validations/create_club_age.png)
+
+![Create Club Date](readme_resources/pages/validations/create_club_date.png)
+
+![Create Club Frequency](readme_resources/pages/validations/create_club_frequency.png)
+
+![Enroll Duplicate](readme_resources/pages/validations/enroll_duplicate.png)
+

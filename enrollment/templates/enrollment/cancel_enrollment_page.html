@@ -19,19 +19,18 @@
         <form action="{% url 'enrollment:cancel_enrollment' enrollment.id %}" method="post" style="display:inline;"
             class="cancel-enrollment-form">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm cancel-enrollment-btn"
-                aria-label="Cancel enrollment for {{ enrollment.child.first_name }} {{ enrollment.child.surname }} in {{ enrollment.club.name }}">
+            <button type="submit" class="btn btn-danger btn-sm cancel-enrollment-btn">
                 Cancel
             </button>
         </form>
     </li>
     {% empty %}
-    <li class="list-group-item" aria-label="No enrollments found">No enrollments found.</li>
+    <li class="list-group-item">No enrollments found.</li>
     {% endfor %}
 </ul>
 
 <!-- Back button -->
-<a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mt-3" aria-label="Back to Parent Dashboard">
+<a href="{% url 'user:parent_dashboard' %}" class="btn btn-secondary mt-3">
     Back to Dashboard
 </a>
 
