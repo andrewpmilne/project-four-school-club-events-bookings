@@ -179,8 +179,7 @@ The project relies on the following Python packages (as specified in `requiremen
 - **Heroku:** Cloud platform used to deploy and host the website.
 - **pip3:** Package manager used to install dependencies.  
 - **Gunicorn:** Web server used to run the website.  
-- **Django-allauth:** Authentication library used to create and manage user accounts.  
-- **Render:** Cloud platform used to host the website.  
+- **Django-allauth:** Authentication library used to create and manage user accounts.   
 - **GitHub:** Platform used to host the website's source code.  
 - **VSCode:** IDE used to develop the website.  
 - **Chrome DevTools:** Used to debug and inspect the website.  
