@@ -274,8 +274,7 @@ Please refer to [TESTING.md](./TESTING.md) for a detailed description of the tes
 - [**Django-allauth**](https://django-allauth.readthedocs.io/): Authentication library used for managing user accounts.  
 - [**PostgreSQL**](https://www.postgresql.org/): Database used to store all application data.  
 - [**GitHub**](https://github.com/): Platform used to host the project's source code.  
-- [**Heroku**](https://www.heroku.com/): Cloud platform used to deploy and host the website.  
-- [**Render**](https://render.com/): Cloud platform used to host the website.  
+- [**Heroku**](https://www.heroku.com/): Cloud platform used to deploy and host the website.    
 - [**Google Fonts**](https://fonts.google.com/): Provided fonts used in the website.  
 - [**Icons8**](https://icons8.com/): Used to create and source icons for the website.  
 - [**dbdiagram.io**](https://dbdiagram.io/home): Used to create the ERD.  
